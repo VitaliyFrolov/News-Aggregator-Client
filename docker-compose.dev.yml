@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  task-tracker-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: "always"
+    container_name: "task-tracker-dev"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/task-tracker-dev
+      - /task-tracker-dev/node_modules
+      - /task-tracker-dev/.next
