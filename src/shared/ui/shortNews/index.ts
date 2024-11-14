@@ -1,0 +1,1 @@
+export { ShortNews } from './ui/ShortNews';
