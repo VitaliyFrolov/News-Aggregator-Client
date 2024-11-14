@@ -1,11 +1,11 @@
 'use client'
 import { paths } from '@/app/routing';
-import { login } from '@/features/auth';
-import Link from 'next/link';
+import { register as userRegister } from '@/features/auth';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
-export const SigninForm: FC = () => {
+export const SignupForm: FC = () => {
     const [ passwordVisibility, setPasswordVisibility ] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -20,7 +20,8 @@ export const SigninForm: FC = () => {
     };
 
     const onSubmit = (data: {email: string, password: string}) => {
-        login(data.email, data.password).then((res) => {
+        console.log(data)
+        userRegister(data.email, data.password).then((res) => {
             console.log(res)
         });
     };
@@ -49,7 +50,7 @@ export const SigninForm: FC = () => {
             </div>
             <div className='mb-4'>
                 <label htmlFor='password' className='block text-gray-700 text-sm font-bold mb-2'>
-                    Пароль <span className='text-red-500'>*</span>
+                    Пароль ! <span className='text-red-500'>*</span>
                 </label>
                 <div className='relative'>
                     <input
@@ -83,10 +84,10 @@ export const SigninForm: FC = () => {
             </div>
             <div className='text-center'>
                 <Link
-                    href={paths.signup}
+                    href={paths.signin}
                     className='text-sm text-blue-500 hover:underline'
                 >
-                    У меня еще нет аккаунта
+                    У вас уже есть аккаунт?
                 </Link>
             </div>
         </form>
