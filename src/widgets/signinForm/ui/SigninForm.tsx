@@ -26,59 +26,69 @@ export const SigninForm = () => {
     };
     
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label
-    
-            >
-                Адрес электронной почты<span>*</span>
-            </label>
-            <div>
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+        >
+            <div className='mb-4'>
+                <label htmlFor='email' className='block text-gray-700 text-sm font-bold mb-2'>
+                    Адрес электронной почты <span className='text-red-500'>*</span>
+                </label>
                 <input
-                    
+                    id='email'
+                    type='email'
                     {...register('email', {
                         required: 'Введите адрес электронной почты',
                         maxLength: 50
                     })}
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' // Tailwind styles
                 />
-                {errors.email ? (
-                    <div>
-                        {errors.email.message}
-                    </div>
-                ): null}
+                {errors.email && (
+                    <div className='text-red-500 text-xs italic'>{errors.email.message}</div>
+                )}
             </div>
-            <label
-                
-            >
-                Пароль<span>*</span>
-            </label>
-            <div>
-                <div> 
+            <div className='mb-4'>
+                <label htmlFor='password' className='block text-gray-700 text-sm font-bold mb-2'>
+                    Пароль <span className='text-red-500'>*</span>
+                </label>
+                <div className='relative'>
                     <input
-                       
+                        id='password'
                         type={passwordVisibility ? 'text' : 'password'}
                         {...register('password', {
                             required: 'Введите пароль',
                             maxLength: 50
                         })}
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' // Tailwind styles
                     />
                     <button
-                        
-                        type="button"
+                        type='button'
                         onClick={togglePasswordVisibility}
-                    ></button>
+                        className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600'
+                    >
+                        {passwordVisibility ? <span>Hide</span> : <span>Show</span>}
+                    </button>
+                    {errors.password && (
+                        <div className='text-red-500 text-xs italic'>{errors.password.message}</div>
+                    )}
                 </div>
             </div>
-            <button
-                type='submit'
-            >
-                Продолжить
-            </button>
-            <Link
-                href={paths.signup}
-            >
-                Не удается войти в<br />
-                стистему?
-            </Link>
+            <div className='mb-6'>
+                <button
+                    type='submit'
+                    className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' // Tailwind styles
+                >
+                    Продолжить
+                </button>
+            </div>
+            <div className='text-center'>
+                <Link
+                    href={paths.signup}
+                    className='text-sm text-blue-500 hover:underline'
+                >
+                    Не удается войти в систему?
+                </Link>
+            </div>
         </form>
     );
 };
