@@ -1,4 +1,5 @@
 import { getNews } from "@/entities/news";
+import { ShortArticle} from "@/shared/ui/shortArticle";
 
 export default async function HomePage() {
     const data = await getNews();
@@ -8,17 +9,13 @@ export default async function HomePage() {
         <div>
             {data ? (
                 data.map((item) => (
-                    <div key={item.id}>
-                        <h2>
-                            {item.title}
-                        </h2>
-                        <p>
-                            {item.articles}
-                        </p>
-                        <a href={item.link} target='_blank'>
-                            {item.link}
-                        </a>
-                    </div>
+                    <ShortArticle
+                        key={item.id}
+                        title={item.title}
+                        articles={item.articles}
+                        link={item.link}
+                        id={item.id}
+                    />
                 ))
             ) : (
                 <div>
