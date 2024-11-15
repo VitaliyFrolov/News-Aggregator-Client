@@ -4,9 +4,11 @@ import { login } from '@/features/auth';
 import Link from 'next/link';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 export const SigninForm: FC = () => {
     const [ passwordVisibility, setPasswordVisibility ] = useState(false);
+    const router = useRouter();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -20,8 +22,10 @@ export const SigninForm: FC = () => {
     };
 
     const onSubmit = (data: {email: string, password: string}) => {
-        login(data.email, data.password).then((res) => {
-            console.log(res)
+        login(data.email, data.password).then((user) => {
+            if (user) {
+                router.push('/')
+            }
         });
     };
     

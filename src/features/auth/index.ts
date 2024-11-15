@@ -1,2 +1,1 @@
-export { login } from './api/index';
-export { register } from './api/index';
+export { login, register, logout } from './api/index';

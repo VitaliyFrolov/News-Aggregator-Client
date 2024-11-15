@@ -4,9 +4,11 @@ import { register as userRegister } from '@/features/auth';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export const SignupForm: FC = () => {
     const [ passwordVisibility, setPasswordVisibility ] = useState(false);
+    const router = useRouter();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -21,8 +23,10 @@ export const SignupForm: FC = () => {
 
     const onSubmit = (data: {email: string, password: string}) => {
         console.log(data)
-        userRegister(data.email, data.password).then((res) => {
-            console.log(res)
+        userRegister(data.email, data.password).then((user) => {
+            if (user) {
+                router.push('/')
+            }
         });
     };
     
